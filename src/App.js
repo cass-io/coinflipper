@@ -4,8 +4,8 @@ import './App.css';
 function App() {
   return (
     <div>
-      <h1>Heads or tials?</h1>
-      
+      <h1>Heads or tails?</h1>
+
     </div>
   );
 }
