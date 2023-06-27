@@ -11,7 +11,8 @@ const HeadsOrTails = () => {
     const [hasFlipped, setHasFlipped] = useState(false)
     let [userWon, setUserWon] = useState(false)
 
-    let userCurrency = 0
+
+    let userCurrency = 10
     const [wager, setWager] = useState(0)
     
     const [userInput, setUserInput] = useState(null)
@@ -58,7 +59,7 @@ const HeadsOrTails = () => {
     }
 
     if (winState) {
-        userCurrency += wager
+        userCurrency += parseInt(wager)
         return (
             <div>
                     <h2>You win!</h2>
@@ -90,9 +91,11 @@ const HeadsOrTails = () => {
             </div>
         )
     } else if (!winState && hasFlipped) {
+        userCurrency -= wager
         return (
             <div>
                 <h2>You lost.</h2>
+                <p>Your current balance is {userCurrency}</p>
                 <button onClick={playAgainClick}>Play Again?</button>
             </div>
         )
