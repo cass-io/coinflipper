@@ -1,105 +1,132 @@
 import React, {useState} from 'react';
-import flipLogic from './flipLogic.js';
-import Payout from './Payout.js';
+
 
 const HeadsOrTails = () => {
-    const [headsChosen, setHeadsChosen] = useState(false)
-    const [tailsChosen, setTailsChosen] = useState(false)
-    const [coinSideUp, setCoinSideUp] = useState(flipLogic())
-    const [winState, setWinState] = useState(false)
-
-    const [hasFlipped, setHasFlipped] = useState(false)
-    let [userWon, setUserWon] = useState(false)
-
-
-    let userCurrency = 10
-    const [wager, setWager] = useState(0)
+    //flipLogic randomizes the coin and must be initialized first
+    const flipLogic = () => {
+        return Math.floor(Math.random() * 2)
+    }
     
-    const [userInput, setUserInput] = useState(null)
+    // Hooks
+    const [sideChosen, setSideChosen] = useState(null) // tracks which side of the coin the user has selected
+    const [sideUp, setSideUp] = useState(flipLogic()) // tracks which side of the coin is face up
+    const [wager, setWager] = useState(0) // tracks the users selected wager
+    const [balance, setBalance] = useState(10) // tracks the users funds, initialized at 10, no maximum.
+    const [gameState, setGameState] = useState(0) // tracks the state of the game, this variable simplifies the progression sequence 
+    
+    //handleClick functions to change the gamestate
+    const handleHeadsClick = () => {
+        setSideChosen(0)
+    }
+    
+    const handleTailsClick = () => {
+        setSideChosen(1)
+    }
+    
+    const handlePlayClick = () => {
+        setSideChosen(null)
+        setSideUp(flipLogic())
+        setGameState(0)
+    }
 
     const handleChange = (event) => {
-        console.log('qqq4', typeof(event.target.value))
-        setUserInput(event.target.value);
+        setWager(event.target.value)
     }
 
-    const handleClickHeads = () => {
-        console.log('qt2,',winState,coinSideUp)
-        setHeadsChosen(true)
-        setTailsChosen(false)
+    const handleWagerClick = () => {
+        setGameState(1)
     }
 
-    const handleClickTails = () => {
-        console.log('qt 1',tailsChosen)
-        setTailsChosen(true)
-        setHeadsChosen(false)
-    }
-
-    const handleClickFlip = () => {
-        console.log(`Winstate is ${winState}, tailsChosen is ${tailsChosen}, headsChosen is ${headsChosen}.`)
-        setHasFlipped(true)
-        if (headsChosen == true && coinSideUp == 0) {
-            setWinState(true)
-        } else if (tailsChosen == true && coinSideUp == 1) {
-            setWinState(true)
+    const handleYesClick = () => {
+        if (typeof(wager) != "number") {
+            setGameState(4)
+        } else if (sideUp == sideChosen){
+            setGameState(2)
         } else {
-            setWinState(false)
+            setGameState(3)
         }
     }
 
-    const playAgainClick = () => {
-        setWinState(false)
-        setTailsChosen(false)
-        setHeadsChosen(false)
-        setCoinSideUp(flipLogic())
-        setHasFlipped(false)
+    const handleNoClick = () => {
+        setGameState(0)
     }
 
-    const betClick = () => {
-        setWager(userInput)
+    const handleWinClick = () => {
+        setBalance(parseInt(balance) + parseInt(wager))
+        setSideChosen(null)
+        setSideUp(flipLogic())
+        setGameState(0)
     }
 
-    if (winState) {
-        userCurrency += parseInt(wager)
+    const handleLoseClick = () => {
+        setBalance(parseInt(balance) - parseInt(wager))
+        setSideChosen(null)
+        setSideUp(flipLogic())
+        setGameState(0)
+    }
+
+    // Conditional statement to return various interfaces based on gamestate
+    if (balance <= 0) {
         return (
             <div>
-                    <h2>You win!</h2>
-                    <button onClick={playAgainClick}>Play Again?</button>
-                    <h2>Your current balance is: {userCurrency}</h2>
+                <h3>You are out of poopcoins! Better luck next time.</h3>
             </div>
         )
-    } else if (!winState && !headsChosen && !tailsChosen){
-        return (  
+    } else if (gameState == 0) {
+        return (
             <div>
-                <button onClick={handleClickHeads}>Heads</button><button onClick={handleClickTails}>Tails</button>
-                <p>Your current balance is: {userCurrency}.
-                Input your wager below, double or nothing.</p>
-                
-                <input
+                <div><p3>you have {balance} poopcoin</p3></div>
+                <button onClick={handleHeadsClick}>Heads</button> <button onClick={handleTailsClick}>Tails</button>
+                <div><input
                 type="text"
-                id="userInput"
-                name="userInput"
+                id="wager"
+                name="wager"
                 onChange={handleChange}
-                value={userInput}
-                />
-                <button onClick={betClick}>Bet!</button>
-            </div>
-        );
-    } else if ((headsChosen || tailsChosen) && !hasFlipped){
-        return (
-            <div>
-                <button onClick={handleClickFlip}>Flip!</button>
+                value={wager}
+                /></div>
+                <button onClick={handleWagerClick}>Wager</button>
             </div>
         )
-    } else if (!winState && hasFlipped) {
-        userCurrency -= wager
+    } else if (gameState == 1) {
         return (
             <div>
-                <h2>You lost.</h2>
-                <p>Your current balance is {userCurrency}</p>
-                <button onClick={playAgainClick}>Play Again?</button>
+                <h3>Wager {wager}?</h3>
+                <div><button onClick={handleYesClick}>Yes</button><button onClick={handleNoClick}>No</button></div>
+            </div>
+        )
+    } else if (gameState == 2) {
+        return (
+            <div>
+                <h3>You won {wager} poopcoins!</h3>
+                <button onClick={handleWinClick}>Claim</button>
+            </div>
+        )
+    } else if (gameState == 3) {
+        return (
+            <div>
+                <h3>You lose!</h3>
+                <button onClick={handleLoseClick}>Play Again?</button>
+            </div>
+        )
+    } else if (gameState == 4) {
+        return (
+            <div>
+                <div><h3>Please wager only in numerals, and no more than your current balance.</h3></div>
+                <div><p3>you have {balance} poopcoin</p3></div>
+                <button onClick={handleHeadsClick}>Heads</button> <button onClick={handleTailsClick}>Tails</button>
+                <div><input
+                type="text"
+                id="wager"
+                name="wager"
+                onChange={handleChange}
+                value={wager}
+                /></div>
+                <button onClick={handleWagerClick}>Wager</button>
             </div>
         )
     }
+    
+    
 }
 
 export default HeadsOrTails;
