@@ -22,19 +22,20 @@ const HeadsOrTails = () => {
     const handleTailsClick = () => {
         setSideChosen(1)
     }
-    
-    const handlePlayClick = () => {
-        setSideChosen(null)
-        setSideUp(flipLogic())
-        setGameState(0)
-    }
 
     const handleChange = (event) => {
-        setWager(event.target.value)
+        setWager(parseInt(event.target.value))
     }
 
     const handleWagerClick = () => {
-        setGameState(1)
+        console.log(typeof(wager))
+        console.log(wager)
+        if (sideChosen == null) {
+            setGameState(0)
+        } else {
+            setGameState(1)
+        }
+        
     }
 
     const handleYesClick = () => {
@@ -82,7 +83,7 @@ const HeadsOrTails = () => {
                 id="wager"
                 name="wager"
                 onChange={handleChange}
-                value={wager}
+                value={parseInt(wager)}
                 /></div>
                 <button onClick={handleWagerClick}>Wager</button>
             </div>
