@@ -10,7 +10,7 @@ const HeadsOrTails = () => {
     // Hooks
     const [sideChosen, setSideChosen] = useState(null) // tracks which side of the coin the user has selected
     const [sideUp, setSideUp] = useState(flipLogic()) // tracks which side of the coin is face up
-    const [wager, setWager] = useState(0) // tracks the users selected wager
+    const [wager, setWager] = useState("") // tracks the users selected wager
     const [balance, setBalance] = useState(10) // tracks the users funds, initialized at 10, no maximum.
     const [gameState, setGameState] = useState(0) // tracks the state of the game, this variable simplifies the progression sequence 
     
@@ -24,8 +24,9 @@ const HeadsOrTails = () => {
     }
 
     const handleChange = (event) => {
-        setWager(parseInt(event.target.value))
+        setWager(parseInt(event.target.value) ?? 0)
     }
+
 
     const handleWagerClick = () => {
         console.log(typeof(wager))
@@ -83,7 +84,7 @@ const HeadsOrTails = () => {
                 id="wager"
                 name="wager"
                 onChange={handleChange}
-                value={parseInt(wager)}
+                value={wager}
                 /></div>
                 <button onClick={handleWagerClick}>Wager</button>
             </div>
