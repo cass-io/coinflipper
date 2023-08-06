@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import './HeadsOrTails.css';
 
 const HeadsOrTails = () => {
     //flipLogic randomizes the coin and must be initialized first
@@ -7,6 +7,15 @@ const HeadsOrTails = () => {
         return Math.floor(Math.random() * 2)
     }
     
+    /// CSS variable functions
+
+    const sideStyle = () => {
+        if (sideChosen == 0) {
+            return 'button-pressed'
+        } else return 'button'
+    }
+
+
     // Hooks
     const [sideChosen, setSideChosen] = useState(null) // tracks which side of the coin the user has selected
     const [sideUp, setSideUp] = useState(flipLogic()) // tracks which side of the coin is face up
@@ -14,6 +23,7 @@ const HeadsOrTails = () => {
     const [balance, setBalance] = useState(10) // tracks the users funds, initialized at 10, no maximum.
     const [gameState, setGameState] = useState(0) // tracks the state of the game, this variable simplifies the progression sequence 
     
+
     //handleClick functions to change the gamestate
     const handleHeadsClick = () => {
         setSideChosen(0)
@@ -66,19 +76,18 @@ const HeadsOrTails = () => {
         setSideUp(flipLogic())
         setGameState(0)
     }
-
     // Conditional statement to return various interfaces based on gamestate
     if (balance <= 0) {
         return (
             <div>
-                <h3>You are out of poopcoins! Better luck next time.</h3>
+                <h3 class='loss'>You are out of poopcoins! Better luck next time.</h3>
             </div>
         )
     } else if (gameState == 0) {
         return (
             <div>
-                <div><p3>you have {balance} poopcoin</p3></div>
-                <button onClick={handleHeadsClick}>Heads</button> <button onClick={handleTailsClick}>Tails</button>
+                <div class='start-screen'><p3>you have {balance} poopcoin</p3></div>
+                <button class={(sideChosen == 0) ? 'button-pressed' : 'button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
                 type="text"
                 id="wager"
@@ -93,21 +102,21 @@ const HeadsOrTails = () => {
         return (
             <div>
                 <h3>Wager {wager}?</h3>
-                <div><button onClick={handleYesClick}>Yes</button><button onClick={handleNoClick}>No</button></div>
+                <div><button class='button' onClick={handleYesClick}>Yes</button><button class='button' onClick={handleNoClick}>No</button></div>
             </div>
         )
     } else if (gameState == 2) {
         return (
             <div>
                 <h3>You won {wager} poopcoins!</h3>
-                <button onClick={handleWinClick}>Claim</button>
+                <button class='button' onClick={handleWinClick}>Claim</button>
             </div>
         )
     } else if (gameState == 3) {
         return (
             <div>
                 <h3>You lose!</h3>
-                <button onClick={handleLoseClick}>Play Again?</button>
+                <button class='button' onClick={handleLoseClick}>Play Again?</button>
             </div>
         )
     } else if (gameState == 4) {
@@ -115,7 +124,7 @@ const HeadsOrTails = () => {
             <div>
                 <div><h3>Please wager only in numerals, and no more than your current balance.</h3></div>
                 <div><p3>you have {balance} poopcoin</p3></div>
-                <button onClick={handleHeadsClick}>Heads</button> <button onClick={handleTailsClick}>Tails</button>
+                <button class='button' onClick={handleHeadsClick}>Heads</button> <button class='button' onClick={handleTailsClick}>Tails</button>
                 <div><input
                 type="text"
                 id="wager"
@@ -123,7 +132,7 @@ const HeadsOrTails = () => {
                 onChange={handleChange}
                 value={wager}
                 /></div>
-                <button onClick={handleWagerClick}>Wager</button>
+                <button class='button' onClick={handleWagerClick}>Wager</button>
             </div>
         )
     }

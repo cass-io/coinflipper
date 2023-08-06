@@ -1,0 +1,31 @@
+.start-screen {
+    font-family: Helvetica;
+}
+
+button {
+    margin: 3px auto;
+    background-color: rgb(147, 203, 255);
+    border-radius: 15px;
+    padding: 5px;
+    min-width: 50px;
+    min-height: 35px;
+    
+}
+
+.button-pressed {
+    margin: 3px auto;
+    background-color: rgb(210, 233, 255);
+    border-radius: 15px;
+    padding: 5px;
+    min-width: 50px;
+    min-height: 35px;
+}
+
+.button {
+    margin: 3px auto;
+    background-color: rgb(147, 203, 255);
+    border-radius: 15px;
+    padding: 5px;
+    min-width: 50px;
+    min-height: 35px;
+}
