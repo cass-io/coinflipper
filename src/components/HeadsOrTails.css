@@ -17,6 +17,20 @@ button {
     
 }
 
+button:active {
+    margin: 10px auto;
+    background-color: rgb(101, 157, 209);
+    border-radius: 30px;
+    padding: 10px;
+    min-width: 100px;
+    min-height: 35px;
+    font-size: 15px;
+    font-family: Arial;
+    font-weight: bold;
+    color: white;
+    border: hidden;
+}
+
 .button-pressed {
     margin: 10px auto;
     background-color: rgb(101, 157, 209);

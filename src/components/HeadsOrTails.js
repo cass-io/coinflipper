@@ -19,10 +19,10 @@ const HeadsOrTails = () => {
     // Hooks
     const [sideChosen, setSideChosen] = useState(null) // tracks which side of the coin the user has selected
     const [sideUp, setSideUp] = useState(flipLogic()) // tracks which side of the coin is face up
-    const [wager, setWager] = useState("") // tracks the users selected wager
+    const [wager, setWager] = useState(null) // tracks the users selected wager
     const [balance, setBalance] = useState(10) // tracks the users funds, initialized at 10, no maximum.
     const [gameState, setGameState] = useState(0) // tracks the state of the game, this variable simplifies the progression sequence 
-    
+    const [userInput, setUserInput] = useState(null) // updates the value of the input box
 
     //handleClick functions to change the gamestate
     const handleHeadsClick = () => {
@@ -34,27 +34,28 @@ const HeadsOrTails = () => {
     }
 
     const handleChange = (event) => {
-        setWager(parseInt(event.target.value) ?? 0)
+       setUserInput(event.target.value)
     }
 
-
     const handleWagerClick = () => {
-        console.log(typeof(wager))
-        console.log(wager)
+        setWager(userInput)
         if (sideChosen == null) {
             setGameState(0)
-        } else if (wager > balance) {
-            setGameState(5)
-        } else {
+        } else if (userInput > balance) {
+            setGameState(4)
+        }else {
             setGameState(1)
         }
         
     }
 
     const handleYesClick = () => {
-        if (typeof(wager) != "number") {
+        console.log(wager, typeof(wager))
+        if (wager > balance) {
+            setGameState(5)
+        } else if (isNaN(wager)) {
             setGameState(4)
-        } else if (sideUp == sideChosen){
+        } else if (sideUp == sideChosen) {
             setGameState(2)
         } else {
             setGameState(3)
@@ -95,7 +96,7 @@ const HeadsOrTails = () => {
                 id="wager"
                 name="wager"
                 onChange={handleChange}
-                value={wager}
+                value={userInput}
                 /></div>
                 <button onClick={handleWagerClick}>Wager</button>
             </div>
@@ -125,15 +126,14 @@ const HeadsOrTails = () => {
         return (
             <div class="bg">
                 <div><h3>Please wager only in numerals, and no more than your current balance.</h3></div>
-                <div><p3>you have {balance} poopcoin</p3></div>
-                <button class='button' onClick={handleHeadsClick}>Heads</button> <button class='button' onClick={handleTailsClick}>Tails</button>
+                <div class='start-screen'><p3>you have {balance} poopcoin</p3></div>
+                <button class={(sideChosen == 0) ? 'button-pressed' : 'button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
-                class="input"
                 type="text"
                 id="wager"
                 name="wager"
                 onChange={handleChange}
-                value={wager}
+                value={userInput}
                 /></div>
                 <button class='button' onClick={handleWagerClick}>Wager</button>
             </div>
@@ -142,7 +142,7 @@ const HeadsOrTails = () => {
         return (
             <div class="bg">
                 <div><h3>You cannot wager more than your current balance.</h3></div>
-                <button onClick={setWager(0) + setGameState(0)}></button>
+                <button onClick={setWager(0) + setGameState(0)}>OK</button>
             </div>
         )
     }
