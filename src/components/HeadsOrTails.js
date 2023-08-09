@@ -53,7 +53,7 @@ const HeadsOrTails = () => {
         console.log(wager, typeof(wager))
         if (wager > balance) {
             setGameState(5)
-        } else if (isNaN(wager)) {
+        } else if (isNaN(wager) || (wager == null)) {
             setGameState(4)
         } else if (sideUp == sideChosen) {
             setGameState(2)
