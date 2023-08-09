@@ -43,6 +43,8 @@ const HeadsOrTails = () => {
         console.log(wager)
         if (sideChosen == null) {
             setGameState(0)
+        } else if (wager > balance) {
+            setGameState(5)
         } else {
             setGameState(1)
         }
@@ -79,13 +81,13 @@ const HeadsOrTails = () => {
     // Conditional statement to return various interfaces based on gamestate
     if (balance <= 0) {
         return (
-            <div>
+            <div class="bg">
                 <h3 class='loss'>You are out of poopcoins! Better luck next time.</h3>
             </div>
         )
     } else if (gameState == 0) {
         return (
-            <div>
+            <div class="bg">
                 <div class='start-screen'><p3>you have {balance} poopcoin</p3></div>
                 <button class={(sideChosen == 0) ? 'button-pressed' : 'button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
@@ -100,32 +102,33 @@ const HeadsOrTails = () => {
         )
     } else if (gameState == 1) {
         return (
-            <div>
+            <div class="bg">
                 <h3>Wager {wager}?</h3>
                 <div><button class='button' onClick={handleYesClick}>Yes</button><button class='button' onClick={handleNoClick}>No</button></div>
             </div>
         )
     } else if (gameState == 2) {
         return (
-            <div>
+            <div class="bg">
                 <h3>You won {wager} poopcoins!</h3>
                 <button class='button' onClick={handleWinClick}>Claim</button>
             </div>
         )
     } else if (gameState == 3) {
         return (
-            <div>
+            <div class="bg">
                 <h3>You lose!</h3>
                 <button class='button' onClick={handleLoseClick}>Play Again?</button>
             </div>
         )
     } else if (gameState == 4) {
         return (
-            <div>
+            <div class="bg">
                 <div><h3>Please wager only in numerals, and no more than your current balance.</h3></div>
                 <div><p3>you have {balance} poopcoin</p3></div>
                 <button class='button' onClick={handleHeadsClick}>Heads</button> <button class='button' onClick={handleTailsClick}>Tails</button>
                 <div><input
+                class="input"
                 type="text"
                 id="wager"
                 name="wager"
@@ -133,6 +136,13 @@ const HeadsOrTails = () => {
                 value={wager}
                 /></div>
                 <button class='button' onClick={handleWagerClick}>Wager</button>
+            </div>
+        )
+    } else if (gameState == 5) {
+        return (
+            <div class="bg">
+                <div><h3>You cannot wager more than your current balance.</h3></div>
+                <button onClick={setWager(0) + setGameState(0)}></button>
             </div>
         )
     }
