@@ -41,7 +41,7 @@ const HeadsOrTails = () => {
         setWager(userInput)
         if (sideChosen == null) {
             setGameState(0)
-        } else if (userInput > balance) {
+        } else if ((userInput > balance) || (userInput <= 0) ) {
             setGameState(4)
         }else {
             setGameState(1)
