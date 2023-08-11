@@ -119,9 +119,9 @@ const HeadsOrTails = () => {
     } else if (gameState == 4) {
         return (
             <div class="bg">
-                <div><h3>Please wager only in numerals, and no more than your current balance.</h3></div>
+                <div><h3>Please wager an amount between 1 and {balance}</h3></div>
                 <div class='start-screen'><p3>you have {balance} coins</p3></div>
-                <button class={(sideChosen == 0) ? 'button-pressed' : 'flipper-button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
+                <button class={(sideChosen == 0) ? 'button-pressed' : 'flipper-button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'flipper-button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
                 type="text"
                 id="wager"
