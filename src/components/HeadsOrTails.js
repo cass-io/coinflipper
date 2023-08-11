@@ -84,7 +84,7 @@ const HeadsOrTails = () => {
         return (
             <div class="bg">
                 <div class='start-screen'><p3>you have {balance} coins</p3></div>
-                <button class={(sideChosen == 0) ? 'button-pressed' : 'flipper-button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
+                <button class={(sideChosen == 0) ? 'button-pressed' : 'flipper-button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'flipper-button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
                 type="text"
                 id="wager"
