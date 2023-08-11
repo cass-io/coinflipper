@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.button-bar {
+  display: flex;
+  margin: 10px;
+  text-align: left;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.bar-button {
+  padding: 10px;
+  margin-right: 25px;
+  min-width: 128px;
+  min-height: 42px;
+}
+
+.bar-button:active {
+  background-color: rgb(101, 157, 209);
+  padding: 10px;
+  margin-right: 25px;
+  min-width: 128px;
+  min-height: 42px;
+
+}

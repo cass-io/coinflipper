@@ -9,12 +9,6 @@ const HeadsOrTails = () => {
     
     /// CSS variable functions
 
-    const sideStyle = () => {
-        if (sideChosen == 0) {
-            return 'button-pressed'
-        } else return 'button'
-    }
-
 
     // Hooks
     const [sideChosen, setSideChosen] = useState(null) // tracks which side of the coin the user has selected
@@ -83,14 +77,14 @@ const HeadsOrTails = () => {
     if (balance <= 0) {
         return (
             <div class="bg">
-                <h3 class='loss'>You are out of poopcoins! Better luck next time.</h3>
+                <h3 class='loss'>You are out of coins! Better luck next time.</h3>
             </div>
         )
     } else if (gameState == 0) {
         return (
             <div class="bg">
-                <div class='start-screen'><p3>you have {balance} poopcoin</p3></div>
-                <button class={(sideChosen == 0) ? 'button-pressed' : 'button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
+                <div class='start-screen'><p3>you have {balance} coins</p3></div>
+                <button class={(sideChosen == 0) ? 'button-pressed' : 'flipper-button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
                 type="text"
                 id="wager"
@@ -98,36 +92,36 @@ const HeadsOrTails = () => {
                 onChange={handleChange}
                 value={userInput}
                 /></div>
-                <button onClick={handleWagerClick}>Wager</button>
+                <button class='flipper-button' onClick={handleWagerClick}>Wager</button>
             </div>
         )
     } else if (gameState == 1) {
         return (
             <div class="bg">
                 <h3>Wager {wager}?</h3>
-                <div><button class='button' onClick={handleYesClick}>Yes</button><button class='button' onClick={handleNoClick}>No</button></div>
+                <div><button class='flipper-button' onClick={handleYesClick}>Yes</button><button class='flipper-button' onClick={handleNoClick}>No</button></div>
             </div>
         )
     } else if (gameState == 2) {
         return (
             <div class="bg">
-                <h3>You won {wager} poopcoins!</h3>
-                <button class='button' onClick={handleWinClick}>Claim</button>
+                <h3>You won {wager} coins!</h3>
+                <button class='flipper-button' onClick={handleWinClick}>Claim</button>
             </div>
         )
     } else if (gameState == 3) {
         return (
             <div class="bg">
                 <h3>You lose!</h3>
-                <button class='button' onClick={handleLoseClick}>Play Again?</button>
+                <button class='flipper-button' onClick={handleLoseClick}>Play Again?</button>
             </div>
         )
     } else if (gameState == 4) {
         return (
             <div class="bg">
                 <div><h3>Please wager only in numerals, and no more than your current balance.</h3></div>
-                <div class='start-screen'><p3>you have {balance} poopcoin</p3></div>
-                <button class={(sideChosen == 0) ? 'button-pressed' : 'button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
+                <div class='start-screen'><p3>you have {balance} coins</p3></div>
+                <button class={(sideChosen == 0) ? 'button-pressed' : 'flipper-button'} onClick={handleHeadsClick}>Heads</button> <button class={(sideChosen == 1) ? 'button-pressed' : 'button'} onClick={handleTailsClick}>Tails</button>
                 <div><input
                 type="text"
                 id="wager"
@@ -135,7 +129,7 @@ const HeadsOrTails = () => {
                 onChange={handleChange}
                 value={userInput}
                 /></div>
-                <button class='button' onClick={handleWagerClick}>Wager</button>
+                <button class='flipper-button' onClick={handleWagerClick}>Wager</button>
             </div>
         )
     } else if (gameState == 5) {
