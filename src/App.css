@@ -50,6 +50,13 @@
   margin-right: 25px;
   min-width: 128px;
   min-height: 42px;
+  background-color: rgb(147, 203, 255);
+  border-radius: 30px;
+  font-size: 15px;
+  font-family: Arial;
+  font-weight: bold;
+  color: white;
+  border: hidden;
 }
 
 .bar-button:active {
@@ -58,5 +65,11 @@
   margin-right: 25px;
   min-width: 128px;
   min-height: 42px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-family: Arial;
+  font-weight: bold;
+  color: white;
+  border: hidden;
 
 }
