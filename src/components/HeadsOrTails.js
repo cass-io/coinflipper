@@ -73,11 +73,21 @@ const HeadsOrTails = () => {
         setSideUp(flipLogic())
         setGameState(0)
     }
+
+    const handleGameOver = () => {
+        setBalance(10)
+        setWager(null)
+        setGameState(0)
+    }
     // Conditional statement to return various interfaces based on gamestate
     if (balance <= 0) {
         return (
             <div class="bg">
                 <h3 class='loss'>You are out of coins! Better luck next time.</h3>
+                <div> <p>Play Again?</p> </div>
+                <div>
+                    <button class='flipper-button' onClick={handleGameOver}>Start</button>
+                </div>
             </div>
         )
     } else if (gameState == 0) {
