@@ -1,10 +1,37 @@
-.start-screen {
-    font-family: Helvetica;
+.background {
+    background-color: #191919;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+}
+
+.container {
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 25px;
+    padding: 25px 25px 25px 25px;
+    background: #cb93ff;
+    height: 50%;
+    width: 50%;
+    left: 25%;
+    top: 25%;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+}
+
+p {
+    position: relative;
+    top: 15%;
+    margin: 10%;
+    text-align: center;
 }
 
 .flipper-button {
-    margin: 10px auto;
-    background-color: rgb(147, 203, 255);
+    margin: 2.5% 5% 2.5% 5%;
+    background-color: #93cbff;
     border-radius: 30px;
     padding: 10px;
     min-width: 100px;
@@ -46,24 +73,13 @@
 }
 
 input {
-    margin: 8px;
-    min-height: 30px;
-    min-width: 250px;
-    height: 30px;
-    padding: 8px;
+    text-align: center;
+    margin: 1%;
+    min-height: 7.5%;
+    min-width: 25%;
+    height: 5%;
+    padding: 3.2%;
     border-radius: 30px;
     border: hidden;
-}
-
-.bg {
-    background-color: rgb(159, 175, 243);
-    margin: 20px;
-    padding: 50px;
-    border-radius: 50px;
-}
-
-p3 {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    font-size: 35px;
+    font-size: 200%;
 }
